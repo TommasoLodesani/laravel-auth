@@ -16,12 +16,12 @@ use App\Http\Controllers\Admin\AdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guests.home');
 })->name('home');
 
 Auth::routes();
 
-// Route::get('/admin', 'HomeController@index')->name('admin');
+// Route::get('/admin', 'AdminControllereController@index')->name('admin');
 // Route::resource('posts','Admin\AdminController');
 
 Route::middleware('auth')
@@ -29,8 +29,9 @@ Route::middleware('auth')
     ->name('admin.')
     ->prefix('admin')
     ->group(function (){
-        Route::resource('posts','AdminController');
-        Route::get('/admin', 'HomeController@index');
+        Route::get('/', 'AdminController@dashboard')->name('dashboard');
+        Route::resource('posts','PostController');
+
 
         });
 
